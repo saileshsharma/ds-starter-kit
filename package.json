@@ -1,0 +1,19 @@
+{
+  "name": "ai-builder-starter",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "ai:build": "node scripts/ai-build/run.mjs",
+    "ai:validate": "node scripts/ai-build/validate.mjs",
+    "ai:demo": "node scripts/ai-build/run.mjs --from-spec examples/claims-dashboard.spec.json",
+    "format": "npx prettier -w .",
+    "lint": "echo \"(add eslint config if you want)\""
+  },
+  "dependencies": {
+    "ajv": "^8.17.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

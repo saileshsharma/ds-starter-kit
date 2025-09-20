@@ -1,0 +1,82 @@
+{
+  "page": "ClaimsDashboard",
+  "route": "/claims",
+  "layout": {
+    "type": "Grid",
+    "cols": 12,
+    "gap": "spacing.2"
+  },
+  "sections": [
+    {
+      "type": "Card",
+      "gridArea": {
+        "from": 1,
+        "to": 6
+      },
+      "props": {
+        "title": "Open Claims"
+      },
+      "children": [
+        {
+          "type": "DataTable",
+          "id": "openClaimsTable",
+          "props": {
+            "columns": [
+              {
+                "key": "claimId",
+                "header": "Claim #"
+              },
+              {
+                "key": "status",
+                "header": "Status"
+              },
+              {
+                "key": "owner",
+                "header": "Owner"
+              }
+            ],
+            "dataSource": {
+              "kind": "graphql",
+              "query": "GET_OPEN_CLAIMS"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "Card",
+      "gridArea": {
+        "from": 7,
+        "to": 12
+      },
+      "props": {
+        "title": "KPIs"
+      },
+      "children": [
+        {
+          "type": "Stat",
+          "props": {
+            "label": "Avg Cycle Time",
+            "value": "12.4d"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Card",
+      "props": {
+        "title": "Actions"
+      },
+      "children": [
+        {
+          "type": "Button",
+          "props": {
+            "variant": "primary",
+            "size": "md"
+          },
+          "text": "Create Claim"
+        }
+      ]
+    }
+  ]
+}

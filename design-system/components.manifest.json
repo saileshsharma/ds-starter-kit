@@ -1,0 +1,64 @@
+{
+  "Page": {
+    "import": "@your-ds/react"
+  },
+  "Section": {
+    "import": "@your-ds/react"
+  },
+  "Stack": {
+    "import": "@your-ds/react"
+  },
+  "Grid": {
+    "import": "@your-ds/react"
+  },
+  "Card": {
+    "import": "@your-ds/react"
+  },
+  "Button": {
+    "import": "@your-ds/react",
+    "props": {
+      "variant": {
+        "type": "enum",
+        "values": [
+          "primary",
+          "secondary",
+          "link"
+        ]
+      },
+      "size": {
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "disabled": {
+        "type": "boolean"
+      }
+    }
+  },
+  "DataTable": {
+    "import": "@your-ds/react",
+    "props": {
+      "columns": {
+        "type": "array"
+      },
+      "dataSource": {
+        "type": "object"
+      }
+    }
+  },
+  "Stat": {
+    "import": "@your-ds/react"
+  },
+  "Form": {
+    "import": "@your-ds/react"
+  },
+  "Select": {
+    "import": "@your-ds/react"
+  },
+  "Input": {
+    "import": "@your-ds/react"
+  }
+}
