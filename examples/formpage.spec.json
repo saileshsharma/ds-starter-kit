@@ -1,0 +1,84 @@
+{
+  "page": "FormPage",
+  "route": "/form",
+  "meta": {
+    "title": "Form",
+    "description": "User input form"
+  },
+  "sections": [
+    {
+      "type": "CardComponent",
+      "inputs": {
+        "title": "User Information",
+        "subtitle": "Please fill out your details"
+      },
+      "children": [
+        {
+          "type": "FormComponent",
+          "inputs": {
+            "formGroup": "userForm"
+          },
+          "children": [
+            {
+              "type": "StackComponent",
+              "inputs": {
+                "spacing": "4"
+              },
+              "children": [
+                {
+                  "type": "InputComponent",
+                  "inputs": {
+                    "placeholder": "Full Name",
+                    "formControlName": "name",
+                    "required": true
+                  }
+                },
+                {
+                  "type": "InputComponent",
+                  "inputs": {
+                    "placeholder": "Email",
+                    "type": "email",
+                    "formControlName": "email",
+                    "required": true
+                  }
+                },
+                {
+                  "type": "SelectComponent",
+                  "inputs": {
+                    "placeholder": "Select Role",
+                    "formControlName": "role",
+                    "options": [
+                      {
+                        "value": "user",
+                        "label": "User"
+                      },
+                      {
+                        "value": "admin",
+                        "label": "Administrator"
+                      },
+                      {
+                        "value": "manager",
+                        "label": "Manager"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ButtonComponent",
+                  "text": "Submit",
+                  "inputs": {
+                    "variant": "primary",
+                    "size": "md"
+                  },
+                  "outputs": {
+                    "click": "onSubmit"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

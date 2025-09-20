@@ -1,0 +1,89 @@
+{
+  "page": "Dashboard",
+  "route": "/dashboard",
+  "meta": {
+    "title": "Dashboard",
+    "description": "Analytics and metrics dashboard"
+  },
+  "sections": [
+    {
+      "type": "CardComponent",
+      "inputs": {
+        "title": "Key Metrics",
+        "subtitle": "Overview of important statistics"
+      },
+      "children": [
+        {
+          "type": "StackComponent",
+          "inputs": {
+            "spacing": "3"
+          },
+          "children": [
+            {
+              "type": "StatComponent",
+              "inputs": {
+                "label": "Total Users",
+                "value": "1,234",
+                "trend": "up",
+                "change": "+12%"
+              }
+            },
+            {
+              "type": "StatComponent",
+              "inputs": {
+                "label": "Revenue",
+                "value": "$45,678",
+                "trend": "up",
+                "change": "+8%"
+              }
+            },
+            {
+              "type": "StatComponent",
+              "inputs": {
+                "label": "Conversion",
+                "value": "3.2%",
+                "trend": "neutral",
+                "change": "0%"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CardComponent",
+      "inputs": {
+        "title": "Recent Activity",
+        "subtitle": "Latest user actions"
+      },
+      "children": [
+        {
+          "type": "DataTableComponent",
+          "inputs": {
+            "columns": [
+              {
+                "key": "user",
+                "header": "User"
+              },
+              {
+                "key": "action",
+                "header": "Action"
+              },
+              {
+                "key": "timestamp",
+                "header": "Time"
+              }
+            ],
+            "dataSource": {
+              "kind": "graphql",
+              "query": "GET_RECENT_ACTIVITY",
+              "variables": {
+                "limit": 10
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

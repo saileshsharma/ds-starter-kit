@@ -3,8 +3,8 @@
 // Description: Angular claims management dashboard with data integration
 // Route: /claims
 
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CardComponent } from "@your-ds/angular";
 import { DataTableComponent } from "@your-ds/angular";
 import { StackComponent } from "@your-ds/angular";
@@ -16,19 +16,9 @@ import { SelectComponent } from "@your-ds/angular";
 import { GraphQLService } from "@your-ds/angular/services";
 
 @Component({
-  selector: "app-laimsdashboard",
+  selector: 'app-laimsdashboard',
   standalone: true,
-  imports: [
-    CardComponent,
-    DataTableComponent,
-    StackComponent,
-    StatComponent,
-    ButtonComponent,
-    ModalComponent,
-    FormComponent,
-    SelectComponent,
-    CommonModule,
-  ],
+  imports: [CardComponent , DataTableComponent , StackComponent , StatComponent , ButtonComponent , ModalComponent , FormComponent , SelectComponent , CommonModule],
   template: `
   <app-card title="Open Claims" subtitle="Current open insurance claims" shadow="md">
     <app-data-table [columns]='[{"key":"claimId","header":"Claim #"},{"key":"status","header":"Status"},{"key":"owner","header":"Owner"},{"key":"amount","header":"Amount"},{"key":"createdAt","header":"Created"}]' [dataSource]="graphqlService.query('GET_OPEN_CLAIMS', {"limit":20,"status":"open"})" [sortable]="true" [pagination]="true" [loading]="false" (rowClick)="onClaimRowClick" (sort)="onClaimSort" />
@@ -65,8 +55,10 @@ import { GraphQLService } from "@your-ds/angular/services";
       </app-stack>
     </app-form>
   </app-modal>
-  `,
+  `
 })
 export class ClaimsDashboardComponent {
-  constructor(private graphqlService: GraphQLService) {}
+  constructor(
+  private graphqlService: GraphQLService
+  ) {}
 }

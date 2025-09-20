@@ -1,0 +1,256 @@
+{
+  "page": "DemoPage",
+  "route": "/demo",
+  "meta": {
+    "title": "Demo Page",
+    "description": "A customizable demo page showcasing your design system components"
+  },
+  "layout": {
+    "type": "StackComponent"
+  },
+  "sections": [
+    {
+      "type": "CardComponent",
+      "inputs": {
+        "title": "Welcome to Your Design System",
+        "subtitle": "This demo page showcases the components available in your design system"
+      },
+      "children": [
+        {
+          "type": "TextComponent",
+          "text": "This page was generated using your design system components. You can customize this by editing the specification or using AI prompts to create exactly what you need.",
+          "inputs": {
+            "size": "md"
+          }
+        }
+      ]
+    },
+    {
+      "type": "CardComponent",
+      "inputs": {
+        "title": "Available Components",
+        "subtitle": "Here are some of the components from your design system"
+      },
+      "children": [
+        {
+          "type": "StackComponent",
+          "inputs": {
+            "spacing": "3"
+          },
+          "children": [
+            {
+              "type": "TextComponent",
+              "text": "Buttons:",
+              "inputs": {
+                "size": "sm",
+                "weight": "semibold"
+              }
+            },
+            {
+              "type": "StackComponent",
+              "inputs": {
+                "spacing": "2",
+                "align": "start"
+              },
+              "children": [
+                {
+                  "type": "ButtonComponent",
+                  "text": "Primary Button",
+                  "inputs": {
+                    "variant": "primary",
+                    "size": "md"
+                  }
+                },
+                {
+                  "type": "ButtonComponent",
+                  "text": "Secondary Button",
+                  "inputs": {
+                    "variant": "secondary",
+                    "size": "md"
+                  }
+                },
+                {
+                  "type": "ButtonComponent",
+                  "text": "Outline Button",
+                  "inputs": {
+                    "variant": "outline",
+                    "size": "md"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CardComponent",
+      "inputs": {
+        "title": "Form Components",
+        "subtitle": "Interactive form elements"
+      },
+      "children": [
+        {
+          "type": "FormComponent",
+          "inputs": {
+            "formGroup": "demoForm"
+          },
+          "children": [
+            {
+              "type": "StackComponent",
+              "inputs": {
+                "spacing": "3"
+              },
+              "children": [
+                {
+                  "type": "InputComponent",
+                  "inputs": {
+                    "placeholder": "Enter your name",
+                    "type": "text",
+                    "formControlName": "name"
+                  }
+                },
+                {
+                  "type": "InputComponent",
+                  "inputs": {
+                    "placeholder": "Enter your email",
+                    "type": "email",
+                    "formControlName": "email"
+                  }
+                },
+                {
+                  "type": "SelectComponent",
+                  "inputs": {
+                    "placeholder": "Choose an option",
+                    "formControlName": "option",
+                    "options": [
+                      {"value": "option1", "label": "Option 1"},
+                      {"value": "option2", "label": "Option 2"},
+                      {"value": "option3", "label": "Option 3"}
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CardComponent",
+      "inputs": {
+        "title": "Data Display",
+        "subtitle": "Tables and statistics"
+      },
+      "children": [
+        {
+          "type": "StackComponent",
+          "inputs": {
+            "spacing": "4"
+          },
+          "children": [
+            {
+              "type": "DataTableComponent",
+              "inputs": {
+                "columns": [
+                  {"key": "name", "header": "Name"},
+                  {"key": "role", "header": "Role"},
+                  {"key": "status", "header": "Status"}
+                ],
+                "dataSource": {
+                  "kind": "static",
+                  "data": [
+                    {"name": "John Doe", "role": "Developer", "status": "Active"},
+                    {"name": "Jane Smith", "role": "Designer", "status": "Active"},
+                    {"name": "Bob Wilson", "role": "Manager", "status": "Inactive"}
+                  ]
+                }
+              }
+            },
+            {
+              "type": "StackComponent",
+              "inputs": {
+                "spacing": "2"
+              },
+              "children": [
+                {
+                  "type": "StatComponent",
+                  "inputs": {
+                    "label": "Total Users",
+                    "value": "1,234"
+                  }
+                },
+                {
+                  "type": "StatComponent",
+                  "inputs": {
+                    "label": "Active Sessions",
+                    "value": "567",
+                    "trend": "up",
+                    "change": "+12%"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CardComponent",
+      "inputs": {
+        "title": "Next Steps",
+        "subtitle": "How to customize this demo"
+      },
+      "children": [
+        {
+          "type": "StackComponent",
+          "inputs": {
+            "spacing": "3"
+          },
+          "children": [
+            {
+              "type": "TextComponent",
+              "text": "To create your own pages:",
+              "inputs": {
+                "size": "md",
+                "weight": "medium"
+              }
+            },
+            {
+              "type": "TextComponent",
+              "text": "1. Use AI prompts: npm run ai:build -- --prompt prompts/your-prompt.md",
+              "inputs": {
+                "size": "sm"
+              }
+            },
+            {
+              "type": "TextComponent",
+              "text": "2. Edit specifications: modify examples/generic-page-demo.spec.json",
+              "inputs": {
+                "size": "sm"
+              }
+            },
+            {
+              "type": "TextComponent",
+              "text": "3. Customize design system: edit design-system/components.manifest.json",
+              "inputs": {
+                "size": "sm"
+              }
+            },
+            {
+              "type": "ButtonComponent",
+              "text": "Learn More",
+              "inputs": {
+                "variant": "primary",
+                "size": "md"
+              },
+              "outputs": {
+                "click": "onLearnMore"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

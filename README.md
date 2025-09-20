@@ -27,7 +27,7 @@ npm install
 
 # 3) Try the Angular demo
 npm run ai:demo
-# ✅ Generates: src/pages/claimsdashboard.component.ts
+# ✅ Generates: src/pages/demopage.component.ts (showcases your design system)
 
 # 4) Test AI generation (with API key)
 OPENAI_API_KEY=sk-xxx npm run ai:build -- --prompt prompts/angular-user-profile.md
@@ -42,8 +42,15 @@ npm run ai:validate           # Validate spec against schema
 npm run ai:quality            # Run quality gates on spec
 
 # Angular demos
-npm run ai:demo               # Generate Angular dashboard
-npm run ai:demo:watch         # Watch Angular spec for changes
+npm run ai:demo               # Generate generic demo page
+npm run ai:demo:watch         # Watch demo spec for changes
+
+# Page creators
+npm run ai:create             # Interactive page creator
+npm run ai:create:dashboard   # Create dashboard page
+npm run ai:create:form        # Create form page
+npm run ai:create:listing     # Create data listing page
+npm run ai:create:settings    # Create settings page
 
 # Development
 npm run format                # Format code with Prettier
