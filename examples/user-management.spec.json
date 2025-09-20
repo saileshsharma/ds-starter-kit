@@ -1,0 +1,47 @@
+{
+  "page": "UserManagement",
+  "route": "/users",
+  "meta": {
+    "title": "User Management",
+    "description": "Manage users and their permissions"
+  },
+  "sections": [
+    {
+      "type": "CardComponent",
+      "inputs": {
+        "title": "Users",
+        "subtitle": "Manage system users and roles"
+      },
+      "children": [
+        {
+          "type": "StackComponent",
+          "inputs": { "spacing": "3" },
+          "children": [
+            {
+              "type": "InputComponent",
+              "inputs": {
+                "placeholder": "Search users...",
+                "type": "text"
+              }
+            },
+            {
+              "type": "DataTableComponent",
+              "inputs": {
+                "columns": [
+                  { "key": "name", "header": "Name" },
+                  { "key": "email", "header": "Email" },
+                  { "key": "role", "header": "Role" },
+                  { "key": "status", "header": "Status" }
+                ],
+                "dataSource": {
+                  "kind": "rest",
+                  "query": "/api/users"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
