@@ -1,0 +1,265 @@
+{
+  "page": "ClaimsDashboard",
+  "route": "/claims",
+  "meta": {
+    "title": "Claims Dashboard",
+    "description": "Angular claims management dashboard with data integration",
+    "keywords": ["claims", "dashboard", "angular"]
+  },
+  "layout": {
+    "type": "GridComponent",
+    "cols": 12,
+    "gap": "spacing.4"
+  },
+  "sections": [
+    {
+      "type": "CardComponent",
+      "id": "openClaimsCard",
+      "gridArea": {
+        "from": 1,
+        "to": 8
+      },
+      "inputs": {
+        "title": "Open Claims",
+        "subtitle": "Current open insurance claims",
+        "shadow": "md"
+      },
+      "children": [
+        {
+          "type": "DataTableComponent",
+          "id": "openClaimsTable",
+          "inputs": {
+            "columns": [
+              {
+                "key": "claimId",
+                "header": "Claim #"
+              },
+              {
+                "key": "status",
+                "header": "Status"
+              },
+              {
+                "key": "owner",
+                "header": "Owner"
+              },
+              {
+                "key": "amount",
+                "header": "Amount"
+              },
+              {
+                "key": "createdAt",
+                "header": "Created"
+              }
+            ],
+            "dataSource": {
+              "kind": "graphql",
+              "query": "GET_OPEN_CLAIMS",
+              "variables": {
+                "limit": 20,
+                "status": "open"
+              }
+            },
+            "sortable": true,
+            "pagination": true,
+            "loading": false
+          },
+          "outputs": {
+            "rowClick": "onClaimRowClick",
+            "sort": "onClaimSort"
+          }
+        }
+      ]
+    },
+    {
+      "type": "CardComponent",
+      "id": "kpiCard",
+      "gridArea": {
+        "from": 9,
+        "to": 12
+      },
+      "inputs": {
+        "title": "Key Metrics",
+        "shadow": "md"
+      },
+      "children": [
+        {
+          "type": "StackComponent",
+          "inputs": {
+            "spacing": "3",
+            "align": "stretch"
+          },
+          "children": [
+            {
+              "type": "StatComponent",
+              "inputs": {
+                "label": "Average Cycle Time",
+                "value": "{{kpiData.avgCycleTime}}",
+                "trend": "up",
+                "change": "-2.3d"
+              }
+            },
+            {
+              "type": "StatComponent",
+              "inputs": {
+                "label": "Total Claims",
+                "value": "{{kpiData.totalClaims}}",
+                "trend": "neutral",
+                "change": "+5"
+              }
+            },
+            {
+              "type": "StatComponent",
+              "inputs": {
+                "label": "Pending Review",
+                "value": "{{kpiData.pendingReview}}",
+                "trend": "down",
+                "change": "-3"
+              }
+            },
+            {
+              "type": "StatComponent",
+              "inputs": {
+                "label": "Approved Today",
+                "value": "{{kpiData.approvedToday}}",
+                "trend": "up",
+                "change": "+8"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CardComponent",
+      "id": "actionsCard",
+      "gridArea": {
+        "from": 1,
+        "to": 12,
+        "row": 2
+      },
+      "inputs": {
+        "title": "Quick Actions",
+        "shadow": "sm"
+      },
+      "children": [
+        {
+          "type": "StackComponent",
+          "inputs": {
+            "spacing": "4"
+          },
+          "children": [
+            {
+              "type": "ButtonComponent",
+              "inputs": {
+                "variant": "primary",
+                "size": "md",
+                "icon": "plus"
+              },
+              "text": "Create New Claim",
+              "outputs": {
+                "click": "onCreateClaim"
+              }
+            },
+            {
+              "type": "ButtonComponent",
+              "inputs": {
+                "variant": "secondary",
+                "size": "md",
+                "icon": "download"
+              },
+              "text": "Export Claims Data",
+              "outputs": {
+                "click": "onExportData"
+              }
+            },
+            {
+              "type": "ButtonComponent",
+              "inputs": {
+                "variant": "outline",
+                "size": "md",
+                "icon": "settings"
+              },
+              "text": "Dashboard Settings",
+              "outputs": {
+                "click": "onOpenSettings"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ModalComponent",
+      "id": "settingsModal",
+      "inputs": {
+        "title": "Dashboard Settings",
+        "size": "lg",
+        "closable": true,
+        "visible": "{{showSettingsModal}}"
+      },
+      "outputs": {
+        "close": "onCloseSettings",
+        "visibleChange": "onSettingsVisibilityChange"
+      },
+      "children": [
+        {
+          "type": "FormComponent",
+          "inputs": {
+            "formGroup": "{{settingsForm}}"
+          },
+          "outputs": {
+            "submit": "onSaveSettings"
+          },
+          "children": [
+            {
+              "type": "StackComponent",
+              "inputs": {
+                "spacing": "4"
+              },
+              "children": [
+                {
+                  "type": "SelectComponent",
+                  "inputs": {
+                    "options": [
+                      {"value": "10", "label": "10 per page"},
+                      {"value": "20", "label": "20 per page"},
+                      {"value": "50", "label": "50 per page"}
+                    ],
+                    "placeholder": "Items per page",
+                    "formControlName": "itemsPerPage"
+                  }
+                },
+                {
+                  "type": "SelectComponent",
+                  "inputs": {
+                    "options": [
+                      {"value": "newest", "label": "Newest First"},
+                      {"value": "oldest", "label": "Oldest First"},
+                      {"value": "amount", "label": "By Amount"}
+                    ],
+                    "placeholder": "Default sort",
+                    "formControlName": "defaultSort"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dataSource": {
+    "queries": [
+      {
+        "name": "kpiData",
+        "type": "rest",
+        "query": "/api/claims/kpi"
+      },
+      {
+        "name": "userPreferences",
+        "type": "rest",
+        "query": "/api/user/preferences"
+      }
+    ]
+  }
+}

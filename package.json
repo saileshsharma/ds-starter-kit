@@ -6,7 +6,13 @@
   "scripts": {
     "ai:build": "node scripts/ai-build/run.mjs",
     "ai:validate": "node scripts/ai-build/validate.mjs",
+    "ai:quality": "node scripts/ai-build/check-quality.mjs",
     "ai:demo": "node scripts/ai-build/run.mjs --from-spec examples/claims-dashboard.spec.json",
+    "ai:demo:watch": "node scripts/ai-build/run.mjs --from-spec examples/claims-dashboard.spec.json --watch",
+    "ai:demo:angular": "node scripts/ai-build/run.mjs --from-spec examples/angular-claims-dashboard.spec.json --framework angular",
+    "ai:demo:angular:watch": "node scripts/ai-build/run.mjs --from-spec examples/angular-claims-dashboard.spec.json --framework angular --watch",
+    "ai:build:react": "node scripts/ai-build/run.mjs --framework react",
+    "ai:build:angular": "node scripts/ai-build/run.mjs --framework angular",
     "format": "npx prettier -w .",
     "lint": "echo \"(add eslint config if you want)\""
   },

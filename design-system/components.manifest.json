@@ -1,64 +1,323 @@
 {
   "Page": {
-    "import": "@your-ds/react"
+    "import": "@your-ds/react",
+    "description": "Root page component with layout structure",
+    "props": {
+      "title": { "type": "string" },
+      "layout": { "type": "enum", "values": ["fluid", "contained"] }
+    }
   },
   "Section": {
-    "import": "@your-ds/react"
+    "import": "@your-ds/react",
+    "description": "Page section container",
+    "props": {
+      "spacing": { "type": "enum", "values": ["sm", "md", "lg"] }
+    }
   },
   "Stack": {
-    "import": "@your-ds/react"
+    "import": "@your-ds/react",
+    "description": "Vertical layout component",
+    "props": {
+      "spacing": { "type": "enum", "values": ["1", "2", "3", "4", "5", "6", "8"] },
+      "align": { "type": "enum", "values": ["start", "center", "end", "stretch"] }
+    }
   },
   "Grid": {
-    "import": "@your-ds/react"
+    "import": "@your-ds/react",
+    "description": "CSS Grid layout component",
+    "props": {
+      "cols": { "type": "number", "min": 1, "max": 12 },
+      "gap": { "type": "string" },
+      "rows": { "type": "number" }
+    }
   },
   "Card": {
-    "import": "@your-ds/react"
+    "import": "@your-ds/react",
+    "description": "Content container with shadow and border",
+    "props": {
+      "title": { "type": "string" },
+      "subtitle": { "type": "string" },
+      "padding": { "type": "enum", "values": ["sm", "md", "lg"] },
+      "shadow": { "type": "enum", "values": ["sm", "md", "lg"] }
+    }
   },
   "Button": {
     "import": "@your-ds/react",
+    "description": "Interactive button component",
     "props": {
       "variant": {
         "type": "enum",
-        "values": [
-          "primary",
-          "secondary",
-          "link"
-        ]
+        "values": ["primary", "secondary", "outline", "ghost", "link"]
       },
       "size": {
         "type": "enum",
-        "values": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "values": ["sm", "md", "lg"]
       },
-      "disabled": {
-        "type": "boolean"
-      }
+      "disabled": { "type": "boolean" },
+      "loading": { "type": "boolean" },
+      "icon": { "type": "string" }
     }
   },
   "DataTable": {
     "import": "@your-ds/react",
+    "description": "Data table with sorting and pagination",
     "props": {
-      "columns": {
-        "type": "array"
-      },
-      "dataSource": {
-        "type": "object"
-      }
+      "columns": { "type": "array", "required": true },
+      "dataSource": { "type": "object", "required": true },
+      "sortable": { "type": "boolean" },
+      "pagination": { "type": "boolean" },
+      "loading": { "type": "boolean" }
     }
   },
   "Stat": {
-    "import": "@your-ds/react"
+    "import": "@your-ds/react",
+    "description": "Statistical value display",
+    "props": {
+      "label": { "type": "string", "required": true },
+      "value": { "type": "string", "required": true },
+      "trend": { "type": "enum", "values": ["up", "down", "neutral"] },
+      "change": { "type": "string" }
+    }
   },
   "Form": {
-    "import": "@your-ds/react"
+    "import": "@your-ds/react",
+    "description": "Form wrapper with validation",
+    "props": {
+      "onSubmit": { "type": "function" },
+      "validation": { "type": "object" }
+    }
   },
   "Select": {
-    "import": "@your-ds/react"
+    "import": "@your-ds/react",
+    "description": "Dropdown selection component",
+    "props": {
+      "options": { "type": "array", "required": true },
+      "placeholder": { "type": "string" },
+      "disabled": { "type": "boolean" },
+      "multiple": { "type": "boolean" }
+    }
   },
   "Input": {
-    "import": "@your-ds/react"
+    "import": "@your-ds/react",
+    "description": "Text input field",
+    "props": {
+      "type": { "type": "enum", "values": ["text", "email", "password", "number"] },
+      "placeholder": { "type": "string" },
+      "disabled": { "type": "boolean" },
+      "required": { "type": "boolean" }
+    }
+  },
+  "Text": {
+    "import": "@your-ds/react",
+    "description": "Typography component",
+    "props": {
+      "size": { "type": "enum", "values": ["xs", "sm", "md", "lg", "xl", "2xl"] },
+      "weight": { "type": "enum", "values": ["normal", "medium", "semibold", "bold"] },
+      "color": { "type": "string" }
+    }
+  },
+  "Badge": {
+    "import": "@your-ds/react",
+    "description": "Status indicator badge",
+    "props": {
+      "variant": { "type": "enum", "values": ["default", "success", "warning", "error"] },
+      "size": { "type": "enum", "values": ["sm", "md", "lg"] }
+    }
+  },
+  "Modal": {
+    "import": "@your-ds/react",
+    "description": "Overlay modal dialog",
+    "props": {
+      "title": { "type": "string" },
+      "size": { "type": "enum", "values": ["sm", "md", "lg", "xl"] },
+      "closable": { "type": "boolean" }
+    }
+  },
+  "PageComponent": {
+    "selector": "app-page",
+    "module": "@your-ds/angular",
+    "description": "Root page component with layout structure",
+    "inputs": {
+      "title": { "type": "string" },
+      "layout": { "type": "enum", "values": ["fluid", "contained"] }
+    },
+    "template": "standalone"
+  },
+  "SectionComponent": {
+    "selector": "app-section",
+    "module": "@your-ds/angular",
+    "description": "Page section container",
+    "inputs": {
+      "spacing": { "type": "enum", "values": ["sm", "md", "lg"] }
+    },
+    "template": "standalone"
+  },
+  "StackComponent": {
+    "selector": "app-stack",
+    "module": "@your-ds/angular",
+    "description": "Vertical layout component",
+    "inputs": {
+      "spacing": { "type": "enum", "values": ["1", "2", "3", "4", "5", "6", "8"] },
+      "align": { "type": "enum", "values": ["start", "center", "end", "stretch"] }
+    },
+    "template": "standalone"
+  },
+  "GridComponent": {
+    "selector": "app-grid",
+    "module": "@your-ds/angular",
+    "description": "CSS Grid layout component",
+    "inputs": {
+      "cols": { "type": "number", "min": 1, "max": 12 },
+      "gap": { "type": "string" },
+      "rows": { "type": "number" }
+    },
+    "template": "standalone"
+  },
+  "CardComponent": {
+    "selector": "app-card",
+    "module": "@your-ds/angular",
+    "description": "Content container with shadow and border",
+    "inputs": {
+      "title": { "type": "string" },
+      "subtitle": { "type": "string" },
+      "padding": { "type": "enum", "values": ["sm", "md", "lg"] },
+      "shadow": { "type": "enum", "values": ["sm", "md", "lg"] }
+    },
+    "template": "standalone"
+  },
+  "ButtonComponent": {
+    "selector": "app-button",
+    "module": "@your-ds/angular",
+    "description": "Interactive button component",
+    "inputs": {
+      "variant": {
+        "type": "enum",
+        "values": ["primary", "secondary", "outline", "ghost", "link"]
+      },
+      "size": {
+        "type": "enum",
+        "values": ["sm", "md", "lg"]
+      },
+      "disabled": { "type": "boolean" },
+      "loading": { "type": "boolean" },
+      "icon": { "type": "string" }
+    },
+    "outputs": {
+      "click": { "type": "event" }
+    },
+    "template": "standalone"
+  },
+  "DataTableComponent": {
+    "selector": "app-data-table",
+    "module": "@your-ds/angular",
+    "description": "Data table with sorting and pagination",
+    "inputs": {
+      "columns": { "type": "array", "required": true },
+      "dataSource": { "type": "observable", "required": true },
+      "sortable": { "type": "boolean" },
+      "pagination": { "type": "boolean" },
+      "loading": { "type": "boolean" }
+    },
+    "outputs": {
+      "rowClick": { "type": "event" },
+      "sort": { "type": "event" }
+    },
+    "template": "standalone"
+  },
+  "StatComponent": {
+    "selector": "app-stat",
+    "module": "@your-ds/angular",
+    "description": "Statistical value display",
+    "inputs": {
+      "label": { "type": "string", "required": true },
+      "value": { "type": "string", "required": true },
+      "trend": { "type": "enum", "values": ["up", "down", "neutral"] },
+      "change": { "type": "string" }
+    },
+    "template": "standalone"
+  },
+  "FormComponent": {
+    "selector": "app-form",
+    "module": "@your-ds/angular",
+    "description": "Form wrapper with validation",
+    "inputs": {
+      "formGroup": { "type": "FormGroup", "required": true },
+      "validation": { "type": "object" }
+    },
+    "outputs": {
+      "submit": { "type": "event" },
+      "valueChange": { "type": "event" }
+    },
+    "template": "standalone"
+  },
+  "SelectComponent": {
+    "selector": "app-select",
+    "module": "@your-ds/angular",
+    "description": "Dropdown selection component",
+    "inputs": {
+      "options": { "type": "array", "required": true },
+      "placeholder": { "type": "string" },
+      "disabled": { "type": "boolean" },
+      "multiple": { "type": "boolean" },
+      "formControlName": { "type": "string" }
+    },
+    "outputs": {
+      "selectionChange": { "type": "event" }
+    },
+    "template": "standalone"
+  },
+  "InputComponent": {
+    "selector": "app-input",
+    "module": "@your-ds/angular",
+    "description": "Text input field",
+    "inputs": {
+      "type": { "type": "enum", "values": ["text", "email", "password", "number"] },
+      "placeholder": { "type": "string" },
+      "disabled": { "type": "boolean" },
+      "required": { "type": "boolean" },
+      "formControlName": { "type": "string" }
+    },
+    "outputs": {
+      "valueChange": { "type": "event" },
+      "blur": { "type": "event" }
+    },
+    "template": "standalone"
+  },
+  "TextComponent": {
+    "selector": "app-text",
+    "module": "@your-ds/angular",
+    "description": "Typography component",
+    "inputs": {
+      "size": { "type": "enum", "values": ["xs", "sm", "md", "lg", "xl", "2xl"] },
+      "weight": { "type": "enum", "values": ["normal", "medium", "semibold", "bold"] },
+      "color": { "type": "string" }
+    },
+    "template": "standalone"
+  },
+  "BadgeComponent": {
+    "selector": "app-badge",
+    "module": "@your-ds/angular",
+    "description": "Status indicator badge",
+    "inputs": {
+      "variant": { "type": "enum", "values": ["default", "success", "warning", "error"] },
+      "size": { "type": "enum", "values": ["sm", "md", "lg"] }
+    },
+    "template": "standalone"
+  },
+  "ModalComponent": {
+    "selector": "app-modal",
+    "module": "@your-ds/angular",
+    "description": "Overlay modal dialog",
+    "inputs": {
+      "title": { "type": "string" },
+      "size": { "type": "enum", "values": ["sm", "md", "lg", "xl"] },
+      "closable": { "type": "boolean" },
+      "visible": { "type": "boolean" }
+    },
+    "outputs": {
+      "close": { "type": "event" },
+      "visibleChange": { "type": "event" }
+    },
+    "template": "standalone"
   }
 }

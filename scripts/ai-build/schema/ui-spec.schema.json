@@ -1,86 +1,173 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "UI Spec Schema",
+  "description": "Schema for AI-generated UI specifications that translate to React components",
   "type": "object",
-  "required": [
-    "page"
-  ],
+  "required": ["page"],
   "properties": {
     "page": {
       "type": "string",
-      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+      "description": "Component name in PascalCase"
     },
     "route": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^/.*",
+      "description": "URL route for the page"
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "keywords": { "type": "array", "items": { "type": "string" } }
+      },
+      "description": "Page metadata"
     },
     "layout": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "enum": ["Grid", "Stack", "Flex", "GridComponent", "StackComponent", "FlexComponent"]
         },
         "cols": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
         },
         "gap": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^spacing\\.[1-9][0-9]*$"
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 1
         }
       },
-      "additionalProperties": true
+      "additionalProperties": false,
+      "description": "Page layout configuration"
     },
     "sections": {
       "type": "array",
-      "items": {
-        "$ref": "#/definitions/node"
-      }
+      "items": { "$ref": "#/definitions/node" },
+      "description": "Main page sections"
     },
     "children": {
       "type": "array",
-      "items": {
-        "$ref": "#/definitions/node"
-      }
+      "items": { "$ref": "#/definitions/node" },
+      "description": "Direct child components"
+    },
+    "dataSource": {
+      "type": "object",
+      "properties": {
+        "queries": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dataQuery" }
+        }
+      },
+      "description": "Page-level data requirements"
     }
   },
   "definitions": {
     "node": {
       "type": "object",
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Page", "Section", "Stack", "Grid", "Card", "Button",
+            "DataTable", "Stat", "Form", "Select", "Input", "Text",
+            "Badge", "Modal", "PageComponent", "SectionComponent",
+            "StackComponent", "GridComponent", "CardComponent",
+            "ButtonComponent", "DataTableComponent", "StatComponent",
+            "FormComponent", "SelectComponent", "InputComponent",
+            "TextComponent", "BadgeComponent", "ModalComponent"
+          ],
+          "description": "Component type from design system manifest"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+          "description": "Unique identifier for the component"
         },
         "props": {
           "type": "object",
-          "additionalProperties": true
+          "additionalProperties": true,
+          "description": "Component props based on manifest definitions (React)"
+        },
+        "inputs": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Component inputs based on manifest definitions (Angular)"
+        },
+        "outputs": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Component outputs/event emitters (Angular)"
         },
         "text": {
-          "type": "string"
+          "type": "string",
+          "description": "Text content for components like Button, Text"
         },
         "gridArea": {
           "type": "object",
           "properties": {
-            "from": {
-              "type": "integer"
-            },
-            "to": {
-              "type": "integer"
-            }
+            "from": { "type": "integer", "minimum": 1, "maximum": 12 },
+            "to": { "type": "integer", "minimum": 1, "maximum": 12 },
+            "row": { "type": "integer", "minimum": 1 },
+            "rowSpan": { "type": "integer", "minimum": 1 }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "description": "Grid positioning for components"
         },
         "children": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/node"
-          }
+          "items": { "$ref": "#/definitions/node" },
+          "description": "Child components"
+        },
+        "dataBinding": {
+          "type": "object",
+          "properties": {
+            "source": { "type": "string" },
+            "field": { "type": "string" },
+            "transform": { "type": "string" }
+          },
+          "description": "Data binding configuration"
+        },
+        "events": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Event handlers"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dataQuery": {
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Query identifier"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["graphql", "rest", "static"],
+          "description": "Data source type"
+        },
+        "query": {
+          "type": "string",
+          "description": "GraphQL query or REST endpoint"
+        },
+        "variables": {
+          "type": "object",
+          "description": "Query variables"
+        },
+        "transform": {
+          "type": "string",
+          "description": "Data transformation function"
         }
       },
       "additionalProperties": false
