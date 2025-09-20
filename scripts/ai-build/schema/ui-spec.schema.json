@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "UI Spec Schema",
-  "description": "Schema for AI-generated UI specifications that translate to React components",
+  "description": "Schema for AI-generated UI specifications that translate to Angular components",
   "type": "object",
   "required": ["page"],
   "properties": {
@@ -29,7 +29,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["Grid", "Stack", "Flex", "GridComponent", "StackComponent", "FlexComponent"]
+          "enum": ["GridComponent", "StackComponent", "FlexComponent"]
         },
         "cols": {
           "type": "integer",
@@ -77,13 +77,11 @@
         "type": {
           "type": "string",
           "enum": [
-            "Page", "Section", "Stack", "Grid", "Card", "Button",
-            "DataTable", "Stat", "Form", "Select", "Input", "Text",
-            "Badge", "Modal", "PageComponent", "SectionComponent",
-            "StackComponent", "GridComponent", "CardComponent",
-            "ButtonComponent", "DataTableComponent", "StatComponent",
-            "FormComponent", "SelectComponent", "InputComponent",
-            "TextComponent", "BadgeComponent", "ModalComponent"
+            "PageComponent", "SectionComponent", "StackComponent",
+            "GridComponent", "CardComponent", "ButtonComponent",
+            "DataTableComponent", "StatComponent", "FormComponent",
+            "SelectComponent", "InputComponent", "TextComponent",
+            "BadgeComponent", "ModalComponent"
           ],
           "description": "Component type from design system manifest"
         },
@@ -92,20 +90,15 @@
           "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
           "description": "Unique identifier for the component"
         },
-        "props": {
-          "type": "object",
-          "additionalProperties": true,
-          "description": "Component props based on manifest definitions (React)"
-        },
         "inputs": {
           "type": "object",
           "additionalProperties": true,
-          "description": "Component inputs based on manifest definitions (Angular)"
+          "description": "Component inputs based on manifest definitions"
         },
         "outputs": {
           "type": "object",
           "additionalProperties": true,
-          "description": "Component outputs/event emitters (Angular)"
+          "description": "Component outputs/event emitters"
         },
         "text": {
           "type": "string",

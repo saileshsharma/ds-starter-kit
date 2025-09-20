@@ -1,17 +1,14 @@
+# AI Builder Starter (Angular Design System)
 
-# AI Builder Starter (Design System–aware)
+A comprehensive toolkit for AI-assisted UI development that converts structured specifications into **Angular** components using your design system.
 
-A comprehensive toolkit for AI-assisted UI development that converts structured specifications into **React** or **Angular** components using your design system.
-
-![AI Builder Architecture](https://img.shields.io/badge/AI%20Builder-Multi--Framework-blue?style=for-the-badge)
-![React Support](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react)
+![AI Builder Architecture](https://img.shields.io/badge/AI%20Builder-Angular--Only-red?style=for-the-badge)
 ![Angular Support](https://img.shields.io/badge/Angular-17+-DD0031?style=flat-square&logo=angular)
 
 ## ✨ Features
 
-- 🤖 **AI-Powered Generation**: Convert natural language requirements to React or Angular components
-- ⚛️ **React Support**: Generate JSX components with hooks and modern patterns
-- 🅰️ **Angular Support**: Generate standalone components with Reactive Forms and services
+- 🤖 **AI-Powered Generation**: Convert natural language requirements to Angular components
+- 🅰️ **Angular Focus**: Generate standalone components with Reactive Forms and services
 - 🎨 **Design System Integration**: Enforce component and token usage from your design system
 - 🔒 **Quality Gates**: Comprehensive validation, accessibility checks, and code quality
 - 📊 **Data-Aware**: Built-in support for GraphQL, REST, and static data sources
@@ -28,17 +25,12 @@ cp -R ai-builder-starter/* .
 # 2) Install dependencies
 npm install
 
-# 3) Try the React demo
+# 3) Try the Angular demo
 npm run ai:demo
-# ✅ Generates: src/pages/ClaimsDashboard.jsx
-
-# 4) Try the Angular demo
-npm run ai:demo:angular
 # ✅ Generates: src/pages/claimsdashboard.component.ts
 
-# 5) Test AI generation (with API key)
-OPENAI_API_KEY=sk-xxx npm run ai:build -- --prompt prompts/claims-dashboard.md --framework react
-OPENAI_API_KEY=sk-xxx npm run ai:build -- --prompt prompts/angular-user-profile.md --framework angular
+# 4) Test AI generation (with API key)
+OPENAI_API_KEY=sk-xxx npm run ai:build -- --prompt prompts/angular-user-profile.md
 ```
 
 ## 📋 Available Commands
@@ -49,15 +41,9 @@ npm run ai:build              # Build from spec or prompt
 npm run ai:validate           # Validate spec against schema
 npm run ai:quality            # Run quality gates on spec
 
-# React demos
-npm run ai:demo               # Generate React dashboard
-npm run ai:demo:watch         # Watch React spec for changes
-npm run ai:build:react        # Build React components
-
 # Angular demos
-npm run ai:demo:angular       # Generate Angular dashboard
-npm run ai:demo:angular:watch # Watch Angular spec for changes
-npm run ai:build:angular      # Build Angular components
+npm run ai:demo               # Generate Angular dashboard
+npm run ai:demo:watch         # Watch Angular spec for changes
 
 # Development
 npm run format                # Format code with Prettier
@@ -69,51 +55,42 @@ npm run lint                 # Run linting (configure as needed)
 ### Generate from Specification
 
 ```bash
-# React generation
-node scripts/ai-build/run.mjs --from-spec examples/claims-dashboard.spec.json --framework react
-
 # Angular generation
-node scripts/ai-build/run.mjs --from-spec examples/angular-claims-dashboard.spec.json --framework angular
+node scripts/ai-build/run.mjs --from-spec examples/angular-claims-dashboard.spec.json
 
 # With formatting and custom output
 node scripts/ai-build/run.mjs \
-  --from-spec examples/enhanced-dashboard.spec.json \
-  --framework react \
+  --from-spec examples/angular-claims-dashboard.spec.json \
   --out src/components \
   --format
 
 # Watch mode for development
 node scripts/ai-build/run.mjs \
   --from-spec examples/angular-claims-dashboard.spec.json \
-  --framework angular \
   --watch
 ```
 
 ### Generate from AI Prompts
 
 ```bash
-# React generation with OpenAI GPT
+# Angular generation with OpenAI GPT
 OPENAI_API_KEY=sk-xxx node scripts/ai-build/run.mjs \
-  --prompt prompts/user-profile.md \
-  --framework react
+  --prompt prompts/angular-user-profile.md
 
 # Angular generation with Anthropic Claude
 ANTHROPIC_API_KEY=xxx node scripts/ai-build/run.mjs \
   --prompt prompts/angular-user-profile.md \
-  --framework angular \
   --provider claude
 
-# Using local Ollama for React
+# Using local Ollama for Angular
 node scripts/ai-build/run.mjs \
-  --prompt prompts/claims-dashboard.md \
-  --framework react \
+  --prompt prompts/angular-user-profile.md \
   --provider ollama \
   --model llama3.1
 
 # Angular with custom AI settings
 node scripts/ai-build/run.mjs \
   --prompt prompts/angular-user-profile.md \
-  --framework angular \
   --provider openai \
   --model gpt-4 \
   --temperature 0.2 \
@@ -124,14 +101,14 @@ node scripts/ai-build/run.mjs \
 
 ```bash
 # Validate JSON schema
-node scripts/ai-build/validate.mjs examples/dashboard.spec.json
+node scripts/ai-build/validate.mjs examples/angular-claims-dashboard.spec.json
 
 # Run comprehensive quality checks
-npm run ai:quality examples/enhanced-dashboard.spec.json
+npm run ai:quality examples/angular-claims-dashboard.spec.json
 
 # Generate with all quality gates
 node scripts/ai-build/run.mjs \
-  --from-spec examples/dashboard.spec.json \
+  --from-spec examples/angular-claims-dashboard.spec.json \
   --format \
   --validate
 ```
@@ -143,32 +120,10 @@ node scripts/ai-build/run.mjs \
 The AI Builder enforces your design system through three key files:
 
 1. **`design-system/tokens.json`** - Design tokens (colors, spacing, typography)
-2. **`design-system/components.manifest.json`** - Available components and their props
+2. **`design-system/components.manifest.json`** - Available Angular components and their inputs
 3. **`scripts/ai-build/schema/ui-spec.schema.json`** - JSON schema for specifications
 
 ### Data Integration
-
-#### React Components
-Components automatically generate data hooks based on `dataSource` configuration:
-
-```json
-{
-  "type": "DataTable",
-  "props": {
-    "dataSource": {
-      "kind": "graphql",
-      "query": "GET_USERS",
-      "variables": { "limit": 10 }
-    }
-  }
-}
-```
-
-Generates:
-
-```jsx
-<DataTable dataSource={useGraphQLQuery("GET_USERS", { limit: 10 })} />
-```
 
 #### Angular Components
 Angular components use services and observables for data integration:
@@ -197,7 +152,7 @@ Generates:
 1. **Prompt Processing** → AI generates JSON specification
 2. **Schema Validation** → Ensures spec follows structure
 3. **Quality Gates** → Component usage, accessibility, design tokens
-4. **Code Generation** → Translates spec to React JSX
+4. **Code Generation** → Translates spec to Angular components
 5. **Code Validation** → Checks generated code quality
 6. **Formatting** → Prettier formatting (optional)
 
@@ -221,15 +176,20 @@ NODE_ENV=development
 
 ```json
 {
-  "Button": {
-    "import": "@your-company/design-system",
+  "ButtonComponent": {
+    "selector": "app-button",
+    "module": "@your-company/angular-design-system",
     "description": "Interactive button component",
-    "props": {
+    "inputs": {
       "variant": {
         "type": "enum",
         "values": ["primary", "secondary", "outline"]
       }
-    }
+    },
+    "outputs": {
+      "click": { "type": "event" }
+    },
+    "template": "standalone"
   }
 }
 ```
@@ -247,52 +207,25 @@ NODE_ENV=development
 }
 ```
 
-3. **Update Import Sources** in the manifest to point to your actual design system package.
+3. **Update Import Sources** in the manifest to point to your actual Angular design system package.
 
 ### Data Layer Integration
 
-Create data hooks in your project:
+Create data services in your project:
 
-```javascript
-// src/hooks/data.js
-export { useGraphQLQuery, useRestQuery } from './path/to/your/data/layer';
-```
-
-Update the translator import path in `scripts/ai-build/translate.mjs`.
-
-## 📖 Examples
-
-### React Dashboard Spec
-
-```json
-{
-  "page": "Dashboard",
-  "route": "/dashboard",
-  "layout": { "type": "Grid", "cols": 12, "gap": "spacing.4" },
-  "sections": [
-    {
-      "type": "Card",
-      "gridArea": { "from": 1, "to": 8 },
-      "props": { "title": "Analytics" },
-      "children": [
-        {
-          "type": "DataTable",
-          "props": {
-            "columns": [
-              { "key": "name", "header": "Name" },
-              { "key": "value", "header": "Value" }
-            ],
-            "dataSource": {
-              "kind": "rest",
-              "query": "/api/analytics"
-            }
-          }
-        }
-      ]
-    }
-  ]
+```typescript
+// src/services/data.service.ts
+@Injectable()
+export class GraphQLService {
+  query(queryName: string, variables: any): Observable<any> {
+    // Your GraphQL implementation
+  }
 }
 ```
+
+Update the translator import path in `scripts/ai-build/angular-translate.mjs`.
+
+## 📖 Examples
 
 ### Angular Dashboard Spec
 
@@ -329,34 +262,8 @@ Update the translator import path in `scripts/ai-build/translate.mjs`.
 }
 ```
 
-### Framework Differences
+### AI Prompt Example
 
-| Feature | React | Angular |
-|---------|-------|---------|
-| Component Names | `Card`, `Button` | `CardComponent`, `ButtonComponent` |
-| Properties | `props: {}` | `inputs: {}` |
-| Events | Inline handlers | `outputs: {}` |
-| Forms | React hooks | `FormGroup`, `FormControl` |
-| Data | Custom hooks | Services + Observables |
-| File Extension | `.jsx`, `.tsx` | `.component.ts` |
-
-### AI Prompt Examples
-
-#### React Prompt
-```markdown
-# React User Profile Page
-
-Create a React user profile page with:
-- User information card (name, email, avatar)
-- Editable form with React hooks
-- Account settings toggles
-- Activity statistics
-
-Use a Stack layout with Cards for each section.
-Include proper form validation and loading states.
-```
-
-#### Angular Prompt
 ```markdown
 # Angular User Profile Page
 
@@ -376,46 +283,48 @@ The AI Builder includes comprehensive quality assurance:
 
 - **Schema Validation**: JSON structure validation
 - **Component Validation**: Manifest compliance checking
-- **Prop Validation**: Type and enum value checking
+- **Input Validation**: Type and enum value checking
 - **Accessibility**: WCAG compliance hints
 - **Design Tokens**: Token usage validation
-- **Naming Conventions**: Component and prop naming
+- **Naming Conventions**: Component and input naming
 - **Data Sources**: Data integration validation
 - **Code Quality**: Generated code validation
 
 ## 🤝 Integration Guide
 
-### With Existing Projects
+### With Existing Angular Projects
 
 1. **Copy the AI Builder** into your project root
-2. **Update manifest** to reference your design system components
-3. **Configure data hooks** to use your data layer
+2. **Update manifest** to reference your Angular design system components
+3. **Configure data services** to use your data layer
 4. **Set up CI/CD** to run quality gates
 5. **Train your team** on prompt engineering
 
-### With Popular Frameworks
+### With Popular Angular Libraries
 
-- **Next.js**: Place generated components in `pages/` or `app/`
-- **Vite/Create React App**: Use `src/pages/` or `src/components/`
-- **Storybook**: Generate story files alongside components
-- **Testing**: Add generated component tests to your test suite
+- **Angular Material**: Update imports to `@angular/material`
+- **PrimeNG**: Update imports to `primeng`
+- **Ng-Zorro**: Update imports to `ng-zorro-antd`
+- **Nebular**: Update imports to `@nebular/theme`
 
 ## 🔮 Advanced Usage
 
 ### Custom Component Types
 
-Extend the schema and manifest to support custom components:
+Extend the schema and manifest to support custom Angular components:
 
 ```json
 {
-  "CustomChart": {
-    "import": "@your-company/charts",
-    "props": {
+  "CustomChartComponent": {
+    "selector": "app-custom-chart",
+    "module": "@your-company/charts",
+    "inputs": {
       "chartType": {
         "type": "enum",
         "values": ["line", "bar", "pie"]
       }
-    }
+    },
+    "template": "standalone"
   }
 }
 ```
@@ -426,28 +335,27 @@ Add event handlers to generated components:
 
 ```json
 {
-  "type": "Button",
-  "props": { "variant": "primary" },
+  "type": "ButtonComponent",
+  "inputs": { "variant": "primary" },
   "text": "Save",
-  "events": {
-    "onClick": "handleSave"
+  "outputs": {
+    "click": "handleSave"
   }
 }
 ```
 
 ### Custom Data Transformations
 
-Implement data transformations in your data hooks:
+Implement data transformations in your Angular services:
 
-```javascript
-export function useGraphQLQuery(query, variables, transform) {
-  const { data, loading, error } = useQuery(query, variables);
-
-  return {
-    data: transform ? transform(data) : data,
-    loading,
-    error
-  };
+```typescript
+@Injectable()
+export class GraphQLService {
+  query(query: string, variables: any, transform?: (data: any) => any): Observable<any> {
+    return this.apollo.query({ query, variables }).pipe(
+      map(result => transform ? transform(result.data) : result.data)
+    );
+  }
 }
 ```
 
@@ -465,7 +373,7 @@ export function useGraphQLQuery(query, variables, transform) {
 
 1. **Environment Variables**: Configure for production
 2. **Data Endpoints**: Ensure production APIs are accessible
-3. **Component Library**: Deploy your design system package
+3. **Component Library**: Deploy your Angular design system package
 4. **Quality Gates**: Run in CI/CD pipeline
 5. **Monitoring**: Set up error tracking for generated components
 
@@ -488,7 +396,7 @@ jobs:
 
 ## 📚 Learning Resources
 
-- **Prompt Engineering**: See `prompts/` directory for examples
+- **Prompt Engineering**: See `prompts/` directory for Angular examples
 - **Component Design**: Study `examples/` specifications
 - **Schema Reference**: Check `scripts/ai-build/schema/ui-spec.schema.json`
 - **Quality Gates**: Review `scripts/ai-build/quality-gates.mjs`
@@ -514,4 +422,4 @@ MIT License - see LICENSE file for details.
 
 ---
 
-**Built with ❤️ for design system-aware AI development**
+**Built with ❤️ for Angular design system-aware AI development**

@@ -1,7 +1,6 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { translate as reactTranslate } from "./translate.mjs";
 import { translate as angularTranslate } from "./angular-translate.mjs";
 import { QualityGates } from "./quality-gates.mjs";
 import { LLMProviders } from "./llm-providers.mjs";
@@ -23,7 +22,7 @@ function parseArgs() {
     temperature: null,
     maxTokens: null,
     useAI: false,
-    framework: "react"
+    framework: "angular"
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -51,7 +50,7 @@ Options:
   --from-spec <file>    Generate from existing spec JSON file
   --prompt <file>       Generate from markdown prompt (uses AI if configured)
   --out <dir>           Output directory (default: src/pages)
-  --framework <name>    Target framework: react, angular (default: react)
+  --framework <name>    Target framework: angular (default: angular)
   --no-validate         Skip JSON schema validation
   --format              Format generated code with Prettier
   --watch               Watch spec file for changes and regenerate
@@ -123,9 +122,8 @@ async function generateFromSpec(specPath, opts) {
       console.warn(qualityGates.formatResults(qualityResults));
     }
 
-    // Generate code based on framework
-    const translate = opts.framework === "angular" ? angularTranslate : reactTranslate;
-    const outFile = translate(spec, opts.outDir);
+    // Generate Angular code
+    const outFile = angularTranslate(spec, opts.outDir);
 
     // Validate generated code
     const codeResults = await qualityGates.validateGeneratedCode(outFile);
@@ -191,9 +189,9 @@ async function generateFromPrompt(promptPath, opts) {
           "description": "Generated from prompt (demo mode)"
         },
         "sections": [
-          { "type": "CardComponent", "props": {"title": "AI Generated (Demo)"}, "children": [
-            { "type": "TextComponent", "text": "This component was generated from a prompt in demo mode", "props": {"size": "md"} },
-            { "type": "ButtonComponent", "text": "Click me", "props": {"variant": "primary"} }
+          { "type": "CardComponent", "inputs": {"title": "AI Generated (Demo)"}, "children": [
+            { "type": "TextComponent", "text": "This component was generated from a prompt in demo mode", "inputs": {"size": "md"} },
+            { "type": "ButtonComponent", "text": "Click me", "inputs": {"variant": "primary"} }
           ]}
         ]
       };
@@ -219,9 +217,8 @@ async function generateFromPrompt(promptPath, opts) {
       console.warn(qualityGates.formatResults(qualityResults));
     }
 
-    // Generate code based on framework
-    const translate = opts.framework === "angular" ? angularTranslate : reactTranslate;
-    const outFile = translate(spec, opts.outDir);
+    // Generate Angular code
+    const outFile = angularTranslate(spec, opts.outDir);
 
     // Validate generated code
     const codeResults = await qualityGates.validateGeneratedCode(outFile);
